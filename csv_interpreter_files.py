@@ -56,7 +56,8 @@ def output_results():
                     if os.path.isfile(data_file):
                         data = int(open(data_file, "r").readlines()[0])
                         if data == top_number:
-                            print(number)
+                            print(first_column)
+                            os.remove(data_file)
                         else:
                             with open(data_file, "w") as file:
                                 file.write((str(data + 1)))
