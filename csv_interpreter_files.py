@@ -3,9 +3,9 @@ import argparse
 import math
 import sys
 import os
-import magic
-import csv
+from itertools import zip_longest
 import tempfile
+import magic
 
 
 PERCENTAGE = 0.75
@@ -57,18 +57,19 @@ def output_results():
     top_number = math.ceil(len(arguments.csv_files) * PERCENTAGE) - 1
     folder = tempfile.mktemp()
     os.mkdir(folder)
+    buffers = [open(csv_file, "r") for csv_file in arguments.csv_files]
     try:
-        for file in arguments.csv_files:
-            with open(file, newline='') as csv_file:
-                reader = csv.reader(csv_file, delimiter=',')
-                for number, row in enumerate(reader, 1):
-                    first_column = int(row[0])
+        for lines in zip_longest(*buffers, fillvalue=''):
+            for line in lines:
+                number = line.split(",")[0]
+                if number != '':
+                    number = int(number)
                     data_file = os.path.join(
-                        folder, "{}.txt".format(first_column))
+                        folder, "{}.txt".format(number))
                     if os.path.isfile(data_file):
                         data = int(open(data_file, "r").readlines()[0])
                         if data == top_number:
-                            print(first_column)
+                            print(number)
                             os.remove(data_file)
                         else:
                             write_file(data_file, str(data + 1))
@@ -76,7 +77,7 @@ def output_results():
                         write_file(data_file, "1")
 
     except ValueError as error:
-        print(error, "Error in line {} in file {}".format(number, file))
+        print(error)
         sys.exit(1)
 
 
