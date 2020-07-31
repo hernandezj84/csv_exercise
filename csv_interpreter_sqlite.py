@@ -61,6 +61,15 @@ class DataInteractions:
         sql_insert = "INSERT INTO data (key, value) VALUES ({}, 1)"
         self.__cursor.execute(sql_insert.format(key))
 
+    def delete_key(self, key):
+        """Delete the key that is already printed.
+
+        Args:
+            key (int): Column that is already printed and has to be deleted
+        """
+        sql_delete = "DELETE FROM data WHERE key = {}"
+        self.__cursor.execute(sql_delete.format(key))
+
     def commit_changes(self):
         """Commit the changes made in the database
 
@@ -116,6 +125,7 @@ def output_results():
                     if found_number is not None:
                         if found_number == top_number:
                             print(number)
+                            data.delete_key(number)
                         else:
                             new_value = found_number + 1
                             data.update_key(number, new_value)
