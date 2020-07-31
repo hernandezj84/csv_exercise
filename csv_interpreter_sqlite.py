@@ -2,10 +2,11 @@
 import argparse
 import math
 from itertools import zip_longest
-import magic
 import sys
 import os
 import sqlite3
+import magic
+
 
 PERCENTAGE = 0.75
 DATABASE_FILE = "database.db"
