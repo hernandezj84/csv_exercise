@@ -38,6 +38,18 @@ def validate_arguments():
         sys.exit(0)
 
 
+def write_file(file_path, data):
+    """Write strings in the file provided
+
+    Args:
+        file_path (str): Path of the file
+        data (str): String that will be written in the file
+    """
+    with open(file_path, "w") as file:
+        file.write(data)
+    file.close()
+
+
 def output_results():
     """Prints as an output one column list of numbers that exists in at least 75%
     of the csv files given.
@@ -59,13 +71,9 @@ def output_results():
                             print(first_column)
                             os.remove(data_file)
                         else:
-                            with open(data_file, "w") as file:
-                                file.write((str(data + 1)))
-                            file.close()
+                            write_file(data_file, str(data + 1))
                     else:
-                        with open(data_file, "w") as file:
-                            file.write("1")
-                        file.close()
+                        write_file(data_file, "1")
 
     except ValueError as error:
         print(error, "Error in line {} in file {}".format(number, file))
