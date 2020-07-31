@@ -36,7 +36,11 @@ class DataInteractions:
         """
         sql_search = "SELECT value FROM data WHERE key = {}"
         result = self.__cursor.execute(sql_search.format(number)).fetchone()
-        return result[0]
+        if result is not None:
+            result = result[0]
+        else:
+            result = None
+        return result
 
     def update_key(self, key, number):
         """Update the value of a given column if the number is found again in the csv files.
@@ -46,7 +50,7 @@ class DataInteractions:
             number (int): Times that the column is repeated in the csv files
         """
         sql_update = "UPDATE data SET value = {} WHERE key = {}"
-        self.__cursor.execute(sql_update.format(key, number))
+        self.__cursor.execute(sql_update.format(number, key))
 
     def insert_new_key(self, key):
         """Insert a new key in the database when is the first time that the column is found.
@@ -54,8 +58,8 @@ class DataInteractions:
         Args:
             key (int): New column found in the csv files.
         """
-        sql_update = "UPDATE data SET value = {} WHERE key = {}"
-        self.__cursor.execute(sql_update.format(key))
+        sql_insert = "INSERT INTO data (key, value) VALUES ({}, 1)"
+        self.__cursor.execute(sql_insert.format(key))
 
     def commit_changes(self):
         """Commit the changes made in the database
@@ -108,10 +112,10 @@ def output_results():
                 if number != '':
                     number = int(number)
                     found_number = data.get_number(number)
+
                     if found_number is not None:
                         if found_number == top_number:
                             print(number)
-
                         else:
                             new_value = found_number + 1
                             data.update_key(number, new_value)
@@ -120,33 +124,6 @@ def output_results():
                         data.insert_new_key(number)
 
         data.commit_changes()
-    except ValueError as error:
-        print(error)
-        sys.exit(1)
-
-
-def main():
-    """Module name"""
-    list_numbers = []
-    free_number = math.ceil(len(arguments.csv_files) * PERCENTAGE) - 1
-    buffers = [open(csv_file, "r") for csv_file in arguments.csv_files]
-    try:
-        for lines in zip_longest(*buffers, fillvalue=''):
-            for line in lines:
-                number = int(line.split(",")[0])
-                counter = list_numbers.count(number)
-                if counter == free_number:
-                    list_numbers.sort()
-                    number_position = list_numbers.index(number)
-                    list_numbers = list_numbers[number_position:]
-                    print(number, len(list_numbers))
-
-                    for _ in range(free_number):
-                        list_numbers.remove(number)
-
-                elif number != '':
-                    list_numbers.append(number)
-                    list_numbers.sort()
     except ValueError as error:
         print(error)
         sys.exit(1)
