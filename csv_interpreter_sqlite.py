@@ -11,23 +11,69 @@ PERCENTAGE = 0.75
 DATABASE_FILE = "database.db"
 
 
-class Database:
+class DataInteractions:
     """Sqlite3 connection object"""
 
     def __init__(self):
-        self.conn = sqlite3.connect(DATABASE_FILE)
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(
+        """Constructor. Exposes methods that interacts with the sqlite3 database.
+
+        """
+        self.__conn = sqlite3.connect(DATABASE_FILE)
+        self.__cursor = self.__conn.cursor()
+        self.__cursor.execute(
             "CREATE TABLE IF NOT EXISTS data (key INTEGER PRIMARY KEY, value INTEGER)")
-        self.conn.commit()
+        self.__conn.commit()
+
+    def get_number(self, number):
+        """Search a given number in the database.
+
+        Args:
+            number (int): Number to be searched
+
+        Returns:
+            [int/boolean]: Number found in the database (int found/boolean not found)
+        """
+        sql_search = "SELECT value FROM data WHERE key = {}"
+        result = self.__cursor.execute(sql_search.format(number)).fetchone()
+        return result[0]
+
+    def update_key(self, key, number):
+        """Update the value of a given column if the number is found again in the csv files.
+
+        Args:
+            key (int): Column that is repeated in the csv files
+            number (int): Times that the column is repeated in the csv files
+        """
+        sql_update = "UPDATE data SET value = {} WHERE key = {}"
+        self.__cursor.execute(sql_update.format(key, number))
+
+    def insert_new_key(self, key):
+        """Insert a new key in the database when is the first time that the column is found.
+
+        Args:
+            key (int): New column found in the csv files.
+        """
+        sql_update = "UPDATE data SET value = {} WHERE key = {}"
+        self.__cursor.execute(sql_update.format(key))
+
+    def commit_changes(self):
+        """Commit the changes made in the database
+
+        """
+        self.__conn.commit()
 
 
 class InvalidFileException(Exception):
-    """Custom exception that will raise when a given path isn't a valid file"""
+    """Custom exception that will raise when a given path isn't a valid file.
+    """
 
 
 def validate_arguments():
     """Raises an exception if any of the arguments aren't valid files.
+
+    Raises:
+        InvalidFileException: Raises if a given argument isn't a file.
+        InvalidFileException: Raises if a given argument isn't a plain text file
     """
     try:
         mimetype = magic.Magic(mime=True)
@@ -46,39 +92,33 @@ def validate_arguments():
 
 def output_results():
     """Prints as an output one column list of numbers that exists in at least 75%
-    of the csv files given."""
+    of the csv files given.
+    """
 
     if os.path.isfile(DATABASE_FILE):
         os.remove(DATABASE_FILE)
     top_number = math.ceil(len(arguments.csv_files) * PERCENTAGE) - 1
     buffers = [open(csv_file, "r") for csv_file in arguments.csv_files]
-    database = Database()
-    sql_search = "SELECT value FROM data WHERE key = {}"
-    sql_update = "UPDATE data SET value = {} WHERE key = {}"
-    sql_insert = "INSERT INTO data (key, value) VALUES ({}, 1)"
-    sql_delete = "DELETE FROM data WHERE key = {}"
+    data = DataInteractions()
     try:
         for lines in zip_longest(*buffers, fillvalue=''):
             for line in lines:
                 number = line.split(",")[0]
                 if number != '':
                     number = int(number)
-                    data = database.cursor.execute(
-                        sql_search.format(number)).fetchone()
-                    if data is not None:
-                        if data[0] == top_number:
+                    found_number = data.get_number(number)
+                    if found_number is not None:
+                        if found_number == top_number:
                             print(number)
-                            database.cursor.execute(sql_delete.format(number))
 
                         else:
-                            new_value = data[0] + 1
-                            database.cursor.execute(sql_update.format(
-                                new_value, number))
+                            new_value = found_number + 1
+                            data.update_key(number, new_value)
 
                     else:
-                        database.cursor.execute(
-                            sql_insert.format(number))
-        database.conn.commit()
+                        data.insert_new_key(number)
+
+        data.commit_changes()
     except ValueError as error:
         print(error)
         sys.exit(1)
