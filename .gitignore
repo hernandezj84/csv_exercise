@@ -113,5 +113,5 @@ media/
 !**/migrations/__init__.py
 
 # Project extensions
-*.in
 csv_test_files/
+random_csv_files/
