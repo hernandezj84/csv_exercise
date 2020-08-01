@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Returns (as an output) one column list of numbers that exists
- in at least 75% of csv files recivied as arguments.
+ in at least 75% of csv files received as arguments.
 """
 import argparse
 import csv
@@ -14,7 +14,7 @@ class InvalidFileException(Exception):
 
 
 def validate_arguments():
-    """Raise an exception if any of the arguments aren't valid files.
+    """Raises an exception if any of the arguments aren't valid files.
     """
     try:
         mimetype = magic.Magic(mime=True)
@@ -59,7 +59,7 @@ def output_results(map_values):
     """Prints as an output one column list of numbers that exists in at least 75%
     of the csv files given.
 
-    Arguments:
+    Args:
         map_values (dict): Has the values (times of existing) of the first column of every file
     """
     percentage = 0.75

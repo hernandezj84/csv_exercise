@@ -1,4 +1,7 @@
-"""Module name"""
+# -*- coding: utf-8 -*-
+"""Returns (as an output) one column list of numbers that exists
+ in at least 75% of csv files received as arguments.
+"""
 import argparse
 import math
 import sys
@@ -39,7 +42,7 @@ def validate_arguments():
 
 
 def write_file(file_path, data):
-    """Write strings in the file provided
+    """Writes strings in the file provided
 
     Args:
         file_path (str): Path of the file

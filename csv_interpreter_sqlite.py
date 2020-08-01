@@ -1,4 +1,7 @@
-"""Module name"""
+# -*- coding: utf-8 -*-
+"""Returns (as an output) one column list of numbers that exists
+ in at least 75% of csv files received as arguments.
+"""
 import argparse
 import math
 from itertools import zip_longest
@@ -13,20 +16,26 @@ DATABASE_FILE = "database.db"
 
 
 class DataInteractions:
-    """Sqlite3 connection object"""
+    """Exposes methods that interacts with the sqlite3 database.
+    """
 
     def __init__(self):
-        """Constructor. Exposes methods that interacts with the sqlite3 database.
+        """Constructor. Defines the instance variables
 
         """
         self.__conn = sqlite3.connect(DATABASE_FILE)
         self.__cursor = self.__conn.cursor()
+        self.create_table()
+
+    def create_table(self):
+        """Creates the data table in sqlite3
+        """
         self.__cursor.execute(
             "CREATE TABLE IF NOT EXISTS data (key INTEGER PRIMARY KEY, value INTEGER)")
         self.__conn.commit()
 
     def get_number(self, number):
-        """Search a given number in the database.
+        """Searches a given number in the database.
 
         Args:
             number (int): Number to be searched
@@ -43,7 +52,7 @@ class DataInteractions:
         return result
 
     def update_key(self, key, number):
-        """Update the value of a given column if the number is found again in the csv files.
+        """Updates the value of a given column if the number is found again in the csv files.
 
         Args:
             key (int): Column that is repeated in the csv files
@@ -53,7 +62,7 @@ class DataInteractions:
         self.__cursor.execute(sql_update.format(number, key))
 
     def insert_new_key(self, key):
-        """Insert a new key in the database when is the first time that the column is found.
+        """Inserts a new key in the database when is the first time that the column is found.
 
         Args:
             key (int): New column found in the csv files.
@@ -62,7 +71,7 @@ class DataInteractions:
         self.__cursor.execute(sql_insert.format(key))
 
     def delete_key(self, key):
-        """Delete the key that is already printed.
+        """Deletes the key that is already printed.
 
         Args:
             key (int): Column that is already printed and has to be deleted
@@ -71,7 +80,7 @@ class DataInteractions:
         self.__cursor.execute(sql_delete.format(key))
 
     def commit_changes(self):
-        """Commit the changes made in the database
+        """Commits the changes made in the database
 
         """
         self.__conn.commit()
