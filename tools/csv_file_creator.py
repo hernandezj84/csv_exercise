@@ -56,6 +56,6 @@ def create_csv_file(list_size, file_path):
                    for _ in range(list_size)]
     csv_file = open("{}.in".format(file_path), "w")
     csv_writer = csv.writer(
-        csv_file, delimiter=",", quoting=csv.QUOTE_NONE, quotechar='', escapechar=' ')
+        csv_file, delimiter=",", quoting=csv.QUOTE_NONE, quotechar='', escapechar=' ', lineterminator="\n")
     csv_writer.writerows(zip(first_column, second_column, last_column))
     csv_file.close()
