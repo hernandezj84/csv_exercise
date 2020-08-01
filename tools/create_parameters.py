@@ -46,6 +46,10 @@ def get_input_files():
         print(error)
         sys.exit(0)
 
+    except NotEnoughFiles as error:
+        print(error)
+        sys.exit(0)
+
     return input_files
 
 
