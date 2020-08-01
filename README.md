@@ -10,7 +10,7 @@ list of numbers that exist in at least 75% of those files.
 2. It is recommended to create a virtual environment [`venv`](https://docs.python.org/3/library/venv.html)
 3. In linux environments use:
     + `$ pip install -r requirements.txt
-4. In windows environments use
+4. In windows environments use:
     + `$ pip install -r requirements-windows.txt
 
 **Usage**
