@@ -32,7 +32,7 @@ If you want to create random csv files use the tools/create_random_csv_files.py 
 The above command will create: 
 + A folder named **random_csv_files**
 + A folder inside **random_csv_files**/random_csv_files_**0_50_100**
-    - The **0** value of the folder indicates that the folder is the first created by the user. In the next execution this number will be incremented by 1.
+    - The **0** value of the folder indicates that the folder is the first created by the user. In the next execution, this number will be incremented by 1.
     - The **50** value of the folder indicates that the script has created **50** random files named file**1**.in, file**2**.in ... file**50**.in
     - The **100** value of the folder indicates that the script has created files that have ***100*** lines each
 
