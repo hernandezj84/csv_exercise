@@ -9,9 +9,9 @@ list of numbers that exist in at least 75% of those files.
 1. Install python3 interpreter [`python3`](https://www.python.org/)
 2. It is recommended to create a virtual environment [`venv`](https://docs.python.org/3/library/venv.html)
 3. In linux environments use:
-    + `$ pip install -r requirements.txt
+    $ pip install -r requirements.txt
 4. In windows environments use:
-    + `$ pip install -r requirements-windows.txt
+    $ pip install -r requirements-windows.txt
 
 **Usage**
 ---
@@ -20,14 +20,15 @@ list of numbers that exist in at least 75% of those files.
 Usage: python csv_interpreter_dict_map.py test_files/file1.in test_files/file2.in test_files/file3.in test_files/file4.in
 ```
 
+
 **Tools usage**
 ---
 
 For testing purposes, the project has additional python scripts that will help to create more random csv files.
 If you want to create random csv files use the tools/create_random_csv_files.py script as the following:
 ```
-+ `$ cd tools
-+ `$ python create_random_csv_files.py 50 100
+    $ cd tools
+    $ python create_random_csv_files.py 50 100
 ```  
 The above command will create **50** files with **100** lines each: 
 + A folder named **random_csv_files**
@@ -38,14 +39,14 @@ The above command will create **50** files with **100** lines each:
 
 Also, the project counts with a script that helps to use this random csv files as parameters in a very easy way. (This script is also en the tools folder)
 ```
-+ `$ python create_parameters.py 20
+    $ python create_parameters.py 20
 ```
 The above command will create:
 + A text file named parameters.txt with a single line with **20** paths of the file*.in files created with the create_random_files.py script.
 This will help the user to simply copy the line in the file and then paste the string in the terminal.
 ```
-+ `$ cd ..
-+ `$ python csv_interpreter_dict_map.py python csv_interpreter_dict_map.py /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file46.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file1.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file25.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file40.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file24.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file6.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file20.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file50.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file8.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file44.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file19.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file32.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file39.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file28.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file42.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file11.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file21.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file49.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file48.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file15.in
+    $ cd ..
+    $ python csv_interpreter_dict_map.py python csv_interpreter_dict_map.py /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file46.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file1.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file25.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file40.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file24.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file6.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file20.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file50.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file8.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file44.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file19.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file32.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file39.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file28.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file42.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file11.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file21.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file49.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file48.in /home/jonathan/git/csv_exercise/tools/random_csv_files/random_csv_files_0_50_100/file15.in
 ```
 
 For every execution of create_parameters.py file, it will append the new parameters in the next line of the file, in order to test with the same parameters and compare results or re-test some scenarios.
@@ -64,6 +65,6 @@ On one hand, the **csv_interpreter_dict_map.py** can be quicker but with large f
 
 The scripts can be used in the same way as the **csv_interpreter_dict_map.py** script.
 ```
-+ `$ python csv_interpreter_sqlite.py test_files/file1.in test_files/file2.in test_files/file3.in test_files/file4.in
-+ `$ python csv_interpreter_files.py test_files/file1.in test_files/file2.in test_files/file3.in test_files/file4.in
+    $ python csv_interpreter_sqlite.py test_files/file1.in test_files/file2.in test_files/file3.in test_files/file4.in
+    $ python csv_interpreter_files.py test_files/file1.in test_files/file2.in test_files/file3.in test_files/file4.in
 ```
