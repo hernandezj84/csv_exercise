@@ -29,7 +29,7 @@ If you want to create random csv files use the tools/create_random_csv_files.py 
 + `$ cd tools
 + `$ python create_random_csv_files.py 50 100
 ```  
-The above command will create: 
+The above command will create **50** files with **100** lines each: 
 + A folder named **random_csv_files**
 + A folder inside **random_csv_files**/random_csv_files_**0_50_100**
     - The **0** value of the folder indicates that the folder is the first created by the user. In the next execution, this number will be incremented by 1.
