@@ -60,7 +60,7 @@ The **csv_interpreter_sqlite.py** script uses a sqlite3 database to handle the "
 
 The **csv_interpreter_files.py** script uses the file system to store the "map" using several files. It is slower than the **csv_interpreter_sqlite.py** and uses more physical storage. In every execution, it uses a temporary folder to store the multiple files that keep the track of the columns of the csv files.
 
-On one hand, the **csv_interpreter_dict_map.py** can be quicker but with large files, it can exhaust the memory. The other two approaches are slower but both consume a lot of physical memory.  It will depend "where" this script is going to be executed and the types of csv files involved.
+On one hand, the **csv_interpreter_dict_map.py** can be quicker but with large files, it can exhaust the memory. The other two approaches are slower but both consume a lot of physical memory.  It will depend "where" these scripts are going to be executed and the types of csv files involved.
 
 The scripts can be used in the same way as the **csv_interpreter_dict_map.py** script.
 ```
