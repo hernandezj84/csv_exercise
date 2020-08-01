@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Searches input files in the random_csv_files folder according
 to the given argument number_of_files.
 Then the module appends this files as parameters in the paramaters.txt file for further use."""

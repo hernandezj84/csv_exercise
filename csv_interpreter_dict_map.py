@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Returns (as an output) one column list of numbers that exists
  in at least 75% of csv files received as arguments.
 """

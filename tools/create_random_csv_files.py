@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Creates multiple csv format files for testing purposes
 """
 

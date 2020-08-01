@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Helps to create random list for creating random csv_files"""
 import random
 import csv
